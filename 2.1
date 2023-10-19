@@ -1,0 +1,49 @@
+class Author:
+    def __init__(self, name, email, gender):
+        # Конструктор класса. Принимает имя, email и пол автора при создании объекта.
+        self.name = name
+        self.email = email
+        self.gender = gender
+
+    def set_name(self, name):
+        # Метод для установки имени автора.
+        self.name = name
+
+    def get_name(self):
+        # Метод для получения имени автора.
+        return self.name
+
+    def set_email(self, email):
+        # Метод для установки email автора.
+        self.email = email
+
+    def get_email(self):
+        # Метод для получения email автора.
+        return self.email
+
+    def set_gender(self, gender):
+        # Метод для установки пола автора.
+        self.gender = gender
+
+    def get_gender(self):
+        # Метод для получения пола автора.
+        return self.gender
+
+class TestAuthor:
+    def __init__(self):
+        # Создаем объект класса Author и тестируем его методы.
+        author = Author("Имя Автора", "email@example.com", "Мужской")
+        print("Имя автора:", author.get_name())
+        print("Email автора:", author.get_email())
+        print("Пол автора:", author.get_gender())
+
+        # Меняем имя, email и пол автора.
+        author.set_name("Новое Имя Автора")
+        author.set_email("new_email@example.com")
+        author.set_gender("Женский")
+        print("Имя автора после изменений:", author.get_name())
+        print("Email автора после изменений:", author.get_email())
+        print("Пол автора после изменений:", author.get_gender())
+
+# Создаем объект класса TestAuthor для тестирования.
+test_author = TestAuthor()

@@ -1,0 +1,97 @@
+// Абстрактный родительский класс Shape
+abstract class Shape {
+    // Абстрактный метод для вычисления площади фигуры
+    public abstract double calculateArea();
+
+    // Абстрактный метод для вычисления периметра фигуры
+    public abstract double calculatePerimeter();
+}
+
+// Дочерний класс (подкласс) Circle (круг)
+class Circle extends Shape {
+    private double radius; // Радиус круга
+
+    // Конструктор для создания объекта круга с заданным радиусом
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+// Дочерний класс (подкласс) Rectangle (прямоугольник)
+class Rectangle extends Shape {
+    private double width;  // Ширина прямоугольника
+    private double height; // Высота прямоугольника
+
+    // Конструктор для создания объекта прямоугольника с заданной шириной и высотой
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * (width + height);
+    }
+}
+
+// Дочерний класс (подкласс) Triangle (треугольник)
+class Triangle extends Shape {
+    private double side1; // Первая сторона треугольника
+    private double side2; // Вторая сторона треугольника
+    private double side3; // Третья сторона треугольника
+
+    // Конструктор для создания объекта треугольника с заданными сторонами
+    public Triangle(double side1, double side2, double side3) {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    @Override
+    public double calculateArea() {
+        // Используем полупериметр и формулу Герона для вычисления площади треугольника
+        double semiPerimeter = calculatePerimeter() / 2;
+        return Math.sqrt(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3));
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return side1 + side2 + side3;
+    }
+}
+
+public class ShapeTest {
+    public static void main(String[] args) {
+        // Создаем объекты круга, прямоугольника и треугольника
+        Circle circle = new Circle(5);
+        Rectangle rectangle = new Rectangle(4, 6);
+        Triangle triangle = new Triangle(3, 4, 5);
+
+        // Выводим информацию о фигурах
+        System.out.println("Площадь круга: " + circle.calculateArea());
+        System.out.println("Периметр круга: " + circle.calculatePerimeter());
+        System.out.println("Площадь прямоугольника: " + rectangle.calculateArea());
+        System.out.println("Периметр прямоугольника: " + rectangle.calculatePerimeter());
+        System.out.println("Площадь треугольника: " + triangle.calculateArea());
+        System.out.println("Периметр треугольника: " + triangle.calculatePerimeter());
+    }
+}
+
+
+
+

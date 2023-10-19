@@ -1,0 +1,86 @@
+// Интерфейс Movable
+public interface Movable {
+    void moveUp();    // Переместить вверх
+    void moveDown();  // Переместить вниз
+    void moveLeft();  // Переместить влево
+    void moveRight(); // Переместить вправо
+}
+
+// Класс MovablePoint реализует интерфейс Movable
+class MovablePoint implements Movable {
+    private int x, y;  // Координаты точки
+
+    // Конструктор с параметрами x и y
+    public MovablePoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // Реализация методов интерфейса Movable
+    @Override
+    public void moveUp() {
+        y++;
+    }
+
+    @Override
+    public void moveDown() {
+        y--;
+    }
+
+    @Override
+    public void moveLeft() {
+        x--;
+    }
+
+    @Override
+    public void moveRight() {
+        x++;
+    }
+
+    // Переопределение метода toString() для удобного вывода информации о точке
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+}
+
+// Класс MovableCircle реализует интерфейс Movable и содержит объект типа MovablePoint
+class MovableCircle implements Movable {
+    private MovablePoint center;  // Центр окружности
+    private int radius;  // Радиус окружности
+
+    // Конструктор с параметрами x, y, xSpeed, ySpeed и radius
+    public MovableCircle(int x, int y, int xSpeed, int ySpeed, int radius) {
+        this.center = new MovablePoint(x, y);
+        this.center.xSpeed = xSpeed;
+        this.center.ySpeed = ySpeed;
+        this.radius = radius;
+    }
+
+    // Реализация методов интерфейса Movable
+    @Override
+    public void moveUp() {
+        center.y += center.ySpeed;
+    }
+
+    @Override
+    public void moveDown() {
+        center.y -= center.ySpeed;
+    }
+
+    @Override
+    public void moveLeft() {
+        center.x -= center.xSpeed;
+    }
+
+    @Override
+    public void moveRight() {
+        center.x += center.xSpeed;
+    }
+
+    // Переопределение метода toString() для удобного вывода информации о окружности
+    @Override
+    public String toString() {
+        return "MovableCircle[center=" + center + ", radius=" + radius + "]";
+    }
+}

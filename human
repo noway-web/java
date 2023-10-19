@@ -1,0 +1,90 @@
+// Класс для представления головы человека
+class Head {
+    private String eyeColor; // Цвет глаз головы
+
+    // Конструктор для создания объекта головы с заданным цветом глаз
+    public Head(String eyeColor) {
+        this.eyeColor = eyeColor;
+    }
+
+    // Метод для получения цвета глаз
+    public String getEyeColor() {
+        return eyeColor;
+    }
+}
+
+// Класс для представления ноги человека
+class Leg {
+    private int length; // Длина ноги в сантиметрах
+
+    // Конструктор для создания объекта ноги с заданной длиной
+    public Leg(int length) {
+        this.length = length;
+    }
+
+    // Метод для получения длины ноги
+    public int getLength() {
+        return length;
+    }
+}
+
+// Класс для представления руки человека
+class Hand {
+    private int fingers; // Количество пальцев на руке
+
+    // Конструктор для создания объекта руки с заданным количеством пальцев
+    public Hand(int fingers) {
+        this.fingers = fingers;
+    }
+
+    // Метод для получения количества пальцев на руке
+    public int getFingers() {
+        return fingers;
+    }
+}
+
+// Класс для представления человека
+class Human {
+    private Head head; // Голова человека
+    private Leg leg;   // Нога человека
+    private Hand hand;  // Рука человека
+
+    // Конструктор для создания объекта человека с головой, ногой и рукой
+    public Human(Head head, Leg leg, Hand hand) {
+        this.head = head;
+        this.leg = leg;
+        this.hand = hand;
+    }
+
+    // Метод для получения цвета глаз человека
+    public String getEyeColor() {
+        return head.getEyeColor();
+    }
+
+    // Метод для получения длины ноги человека
+    public int getLegLength() {
+        return leg.getLength();
+    }
+
+    // Метод для получения количества пальцев на руке человека
+    public int getFingerCount() {
+        return hand.getFingers();
+    }
+}
+
+public class HumanTest {
+    public static void main(String[] args) {
+        // Создаем объекты головы, ноги и руки
+        Head head = new Head("голубой");
+        Leg leg = new Leg(80);   // предположим, что нога 80 см в длину
+        Hand hand = new Hand(5);  // предположим, что на руке 5 пальцев
+
+        // Создаем объект человека, используя созданные части тела
+        Human human = new Human(head, leg, hand);
+
+        // Тестируем методы класса Human
+        System.out.println("Цвет глаз человека: " + human.getEyeColor());
+        System.out.println("Длина ноги человека: " + human.getLegLength() + " см");
+        System.out.println("Количество пальцев на руке человека: " + human.getFingerCount());
+    }
+}

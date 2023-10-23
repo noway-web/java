@@ -1,0 +1,65 @@
+// Абстрактный класс, представляющий посуду
+abstract class Dish {
+    private String material;
+    private String color;
+
+    public Dish(String material, String color) {
+        this.material = material;
+        this.color = color;
+    }
+
+    // Абстрактный метод для вывода информации о посуде
+    public abstract void displayInfo();
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public String getColor() {
+        return color;
+    }
+}
+
+// Наследник класса Dish - класс Plate, представляющий тарелку
+class Plate extends Dish {
+    private int diameter;
+
+    public Plate(String material, String color, int diameter) {
+        super(material, color);
+        this.diameter = diameter;
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Plate: Material - " + getMaterial() + ", Color - " + getColor() + ", Diameter - " + diameter);
+    }
+}
+
+// Наследник класса Dish - класс Cup, представляющий чашку
+class Cup extends Dish {
+    private boolean handle;
+
+    public Cup(String material, String color, boolean handle) {
+        super(material, color);
+        this.handle = handle;
+    }
+
+    @Override
+    public void displayInfo() {
+        String hasHandle = handle ? "Yes" : "No";
+        System.out.println("Cup: Material - " + getMaterial() + ", Color - " + getColor() + ", Has Handle - " + hasHandle);
+    }
+}
+
+// Пример использования классов
+public class Main {
+    public static void main(String[] args) {
+        // Создание объектов тарелки и чашки
+        Dish plate = new Plate("Ceramic", "White", 20);
+        Dish cup = new Cup("Glass", "Transparent", true);
+
+        // Вывод информации о посуде
+        plate.displayInfo();
+        cup.displayInfo();
+    }
+}

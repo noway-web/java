@@ -1,12 +1,22 @@
 // Абстрактный класс, представляющий мебель
 abstract class Furniture {
-    private String type;
-    private String material;
+    private String type; // Тип мебели
+    private String material; // Материал мебели
 
-    // Конструктор класса
+    // Конструктор класса Furniture
     public Furniture(String type, String material) {
         this.type = type;
         this.material = material;
+    }
+
+    // Геттер для получения типа мебели
+    public String getType() {
+        return type;
+    }
+
+    // Геттер для получения материала мебели
+    public String getMaterial() {
+        return material;
     }
 
     // Абстрактный метод для вывода информации о мебели
@@ -15,7 +25,7 @@ abstract class Furniture {
 
 // Наследник класса Furniture - класс Chair, представляющий стул
 class Chair extends Furniture {
-    private int numberOfLegs;
+    private int numberOfLegs; // Количество ног у стула
 
     // Конструктор класса Chair
     public Chair(String material, int numberOfLegs) {
@@ -26,13 +36,13 @@ class Chair extends Furniture {
     // Реализация абстрактного метода для вывода информации о стуле
     @Override
     public void displayInfo() {
-        System.out.println("Type: " + super.type + ", Material: " + super.material + ", Number of Legs: " + numberOfLegs);
+        System.out.println("Type: " + getType() + ", Material: " + getMaterial() + ", Number of Legs: " + numberOfLegs);
     }
 }
 
 // Наследник класса Furniture - класс Bed, представляющий кровать
 class Bed extends Furniture {
-    private String size;
+    private String size; // Размер кровати
 
     // Конструктор класса Bed
     public Bed(String material, String size) {
@@ -43,20 +53,32 @@ class Bed extends Furniture {
     // Реализация абстрактного метода для вывода информации о кровати
     @Override
     public void displayInfo() {
-        System.out.println("Type: " + super.type + ", Material: " + super.material + ", Size: " + size);
+        System.out.println("Type: " + getType() + ", Material: " + getMaterial() + ", Size: " + size);
     }
 }
 
-// Класс, представляющий магазин мебели
+// Класс FurnitureShop, представляющий магазин мебели
 class FurnitureShop {
-    // Метод для вывода информации о мебели
-    public void displayFurnitureInfo(Furniture furniture) {
-        furniture.displayInfo();
-    }
-}
+    private List<Furniture> furnitureList; // Список для хранения мебели
 
-// Пример использования классов
-public class Main {
+    // Конструктор класса FurnitureShop
+    public FurnitureShop() {
+        furnitureList = new ArrayList<>();
+    }
+
+    // Метод для добавления мебели в магазин
+    public void addFurniture(Furniture furniture) {
+        furnitureList.add(furniture);
+    }
+
+    // Метод для отображения информации о мебели в магазине
+    public void displayFurniture() {
+        System.out.println("Furniture in the shop:");
+        for (Furniture furniture : furnitureList) {
+            furniture.displayInfo();
+        }
+    }
+
     public static void main(String[] args) {
         // Создание объектов мебели различных видов
         Furniture chair = new Chair("Wood", 4);
@@ -65,11 +87,11 @@ public class Main {
         // Создание магазина мебели
         FurnitureShop furnitureShop = new FurnitureShop();
 
-        // Вывод информации о мебели с помощью магазина
-        System.out.println("Chair Info:");
-        furnitureShop.displayFurnitureInfo(chair);
+        // Добавление мебели в магазин
+        furnitureShop.addFurniture(chair);
+        furnitureShop.addFurniture(bed);
 
-        System.out.println("\nBed Info:");
-        furnitureShop.displayFurnitureInfo(bed);
+        // Вывод информации о мебели с помощью магазина
+        furnitureShop.displayFurniture();
     }
 }

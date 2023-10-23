@@ -1,0 +1,75 @@
+// Абстрактный класс, представляющий мебель
+abstract class Furniture {
+    private String type;
+    private String material;
+
+    // Конструктор класса
+    public Furniture(String type, String material) {
+        this.type = type;
+        this.material = material;
+    }
+
+    // Абстрактный метод для вывода информации о мебели
+    public abstract void displayInfo();
+}
+
+// Наследник класса Furniture - класс Chair, представляющий стул
+class Chair extends Furniture {
+    private int numberOfLegs;
+
+    // Конструктор класса Chair
+    public Chair(String material, int numberOfLegs) {
+        super("Chair", material);
+        this.numberOfLegs = numberOfLegs;
+    }
+
+    // Реализация абстрактного метода для вывода информации о стуле
+    @Override
+    public void displayInfo() {
+        System.out.println("Type: " + super.type + ", Material: " + super.material + ", Number of Legs: " + numberOfLegs);
+    }
+}
+
+// Наследник класса Furniture - класс Bed, представляющий кровать
+class Bed extends Furniture {
+    private String size;
+
+    // Конструктор класса Bed
+    public Bed(String material, String size) {
+        super("Bed", material);
+        this.size = size;
+    }
+
+    // Реализация абстрактного метода для вывода информации о кровати
+    @Override
+    public void displayInfo() {
+        System.out.println("Type: " + super.type + ", Material: " + super.material + ", Size: " + size);
+    }
+}
+
+// Класс, представляющий магазин мебели
+class FurnitureShop {
+    // Метод для вывода информации о мебели
+    public void displayFurnitureInfo(Furniture furniture) {
+        furniture.displayInfo();
+    }
+}
+
+// Пример использования классов
+public class Main {
+    public static void main(String[] args) {
+        // Создание объектов мебели различных видов
+        Furniture chair = new Chair("Wood", 4);
+        Furniture bed = new Bed("Metal", "King Size");
+
+        // Создание магазина мебели
+        FurnitureShop furnitureShop = new FurnitureShop();
+
+        // Вывод информации о мебели с помощью магазина
+        System.out.println("Chair Info:");
+        furnitureShop.displayFurnitureInfo(chair);
+
+        System.out.println("\nBed Info:");
+        furnitureShop.displayFurnitureInfo(bed);
+    }
+}

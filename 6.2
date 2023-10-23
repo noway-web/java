@@ -1,0 +1,59 @@
+// Абстрактный класс, представляющий собаку
+abstract class Dog {
+    private String breed;
+    private String size;
+
+    public Dog(String breed, String size) {
+        this.breed = breed;
+        this.size = size;
+    }
+
+    // Абстрактный метод для издания звука собаки
+    public abstract void bark();
+
+    // Метод для вывода информации о собаке
+    public void displayInfo() {
+        System.out.println("Breed: " + breed + ", Size: " + size);
+    }
+}
+
+// Наследник класса Dog - класс Labrador, представляющий породу лабрадор
+class Labrador extends Dog {
+    public Labrador() {
+        super("Labrador", "Large");
+    }
+
+    @Override
+    public void bark() {
+        System.out.println("Labrador barks: Woof! Woof!");
+    }
+}
+
+// Наследник класса Dog - класс Poodle, представляющий породу пудель
+class Poodle extends Dog {
+    public Poodle() {
+        super("Poodle", "Medium");
+    }
+
+    @Override
+    public void bark() {
+        System.out.println("Poodle barks: Arf! Arf!");
+    }
+}
+
+// Пример использования классов
+public class Main {
+    public static void main(String[] args) {
+        // Создание объектов различных пород собак и их тестирование
+        Dog labrador = new Labrador();
+        Dog poodle = new Poodle();
+
+        System.out.println("Labrador Info:");
+        labrador.displayInfo();
+        labrador.bark();
+
+        System.out.println("\nPoodle Info:");
+        poodle.displayInfo();
+        poodle.bark();
+    }
+}

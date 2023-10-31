@@ -1,0 +1,81 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class FootballMatchApp {
+    private int milanScore = 0; // Переменная для хранения счета Милана
+    private int madridScore = 0; // Переменная для хранения счета Мадрида
+
+    private JLabel resultLabel; // Метка для отображения результата
+    private JLabel lastScorerLabel; // Метка для отображения последнего забившего
+    private JLabel winnerLabel; // Метка для отображения победителя
+
+    public FootballMatchApp() {
+        // Создание главного окна приложения
+        JFrame frame = new JFrame("Football Match");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(4, 1));
+
+        // Создание кнопок для Милана и Мадрида
+        JButton milanButton = new JButton("AC Milan");
+        JButton madridButton = new JButton("Real Madrid");
+
+        // Инициализация меток
+        resultLabel = new JLabel("Result: 0 X 0");
+        lastScorerLabel = new JLabel("Last Scorer: N/A");
+        winnerLabel = new JLabel("Winner: DRAW");
+
+        // Обработчик события для кнопки Милана
+        milanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                milanScore++; // Увеличение счета Милана
+                updateLabels("AC Milan"); // Обновление меток
+            }
+        });
+
+        // Обработчик события для кнопки Мадрида
+        madridButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                madridScore++; // Увеличение счета Мадрида
+                updateLabels("Real Madrid"); // Обновление меток
+            }
+        });
+
+        // Добавление компонентов в окно
+        frame.add(milanButton);
+        frame.add(madridButton);
+        frame.add(resultLabel);
+        frame.add(lastScorerLabel);
+        frame.add(winnerLabel);
+        frame.pack(); // Устанавливаем оптимальный размер окна
+        frame.setVisible(true); // Отображаем окно
+    }
+
+    // Метод для обновления меток на основе текущих счетов и последнего забившего
+    private void updateLabels(String lastScorer) {
+        resultLabel.setText("Result: " + milanScore + " X " + madridScore); // Обновление метки результата
+        lastScorerLabel.setText("Last Scorer: " + lastScorer); // Обновление метки последнего забившего
+
+        // Определение победителя и обновление соответствующей метки
+        if (milanScore > madridScore) {
+            winnerLabel.setText("Winner: AC Milan");
+        } else if (milanScore < madridScore) {
+            winnerLabel.setText("Winner: Real Madrid");
+        } else {
+            winnerLabel.setText("Winner: DRAW");
+        }
+    }
+
+    public static void main(String[] args) {
+        // Запуск приложения в потоке событий
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new FootballMatchApp(); // Создание экземпляра приложения
+            }
+        });
+    }
+}

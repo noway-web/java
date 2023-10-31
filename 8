@@ -1,0 +1,121 @@
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
+
+// Абстрактный класс, представляющий общие свойства фигуры
+abstract class Shape {
+    protected Color color;
+    protected int x, y;
+
+    // Конструктор для инициализации цвета и позиции фигуры
+    public Shape(Color color, int x, int y) {
+        this.color = color;
+        this.x = x;
+        this.y = y;
+    }
+
+    // Абстрактный метод для отрисовки фигуры
+    abstract void draw(Graphics g);
+}
+
+// Класс для представления прямоугольника
+class RectangleShape extends Shape {
+    private int width, height;
+
+    public RectangleShape(Color color, int x, int y, int width, int height) {
+        super(color, x, y);
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    void draw(Graphics g) {
+        g.setColor(color);
+        g.fillRect(x, y, width, height);
+    }
+}
+
+// Класс для представления круга
+class CircleShape extends Shape {
+    private int diameter;
+
+    public CircleShape(Color color, int x, int y, int diameter) {
+        super(color, x, y);
+        this.diameter = diameter;
+    }
+
+    @Override
+    void draw(Graphics g) {
+        g.setColor(color);
+        g.fillOval(x, y, diameter, diameter);
+    }
+}
+
+// Класс для представления эллипса
+class EllipseShape extends Shape {
+    private int width, height;
+
+    public EllipseShape(Color color, int x, int y, int width, int height) {
+        super(color, x, y);
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    void draw(Graphics g) {
+        g.setColor(color);
+        g.fillOval(x, y, width, height);
+    }
+}
+
+// Главный класс для отображения окна с фигурами
+public class RandomShapesApp extends JFrame {
+    private static final int WINDOW_WIDTH = 800;
+    private static final int WINDOW_HEIGHT = 600;
+    private static final int NUM_SHAPES = 20;
+
+    private Random random;
+
+    public RandomShapesApp() {
+        random = new Random();
+        setTitle("Random Shapes");
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+
+        for (int i = 0; i < NUM_SHAPES; i++) {
+            int x = random.nextInt(WINDOW_WIDTH);
+            int y = random.nextInt(WINDOW_HEIGHT);
+            int width = random.nextInt(100) + 50;
+            int height = random.nextInt(100) + 50;
+            Color color = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+
+            // Случайный выбор типа фигуры
+            int shapeType = random.nextInt(3);
+            Shape shape;
+            if (shapeType == 0) {
+                shape = new RectangleShape(color, x, y, width, height);
+            } else if (shapeType == 1) {
+                shape = new CircleShape(color, x, y, width);
+            } else {
+                shape = new EllipseShape(color, x, y, width, height);
+            }
+
+            shape.draw(g); // Отрисовка фигуры
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new RandomShapesApp();
+            }
+        });
+    }
+}

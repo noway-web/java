@@ -1,0 +1,58 @@
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class AnimationExample {
+    private static final int FRAME_WIDTH = 800;
+    private static final int FRAME_HEIGHT = 600;
+    private static final int NUM_FRAMES = 3;
+    private static final int FRAME_DELAY = 100;
+
+    private int currentFrame = 0;
+    private Timer timer;
+    private ImageIcon[] frames;
+
+    public AnimationExample() {
+        JFrame frame = new JFrame("Анимация");
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        // Загрузка кадров анимации
+        frames = new ImageIcon[NUM_FRAMES];
+        for (int i = 0; i < NUM_FRAMES; i++) {
+            String filePath = "C:\\Users\\saten\\IdeaProjects\\project_1\\src\\" + "frame" + i + ".png"; // Укажите полные пути к картинкам, если они находятся в другом каталоге
+            frames[i] = new ImageIcon(filePath);
+        }
+
+        // Создание панели для отображения анимации
+        JPanel animationPanel = new JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                super.paintComponent(g);
+                frames[currentFrame].paintIcon(this, g, 0, 0);
+            }
+        };
+        frame.add(animationPanel);
+
+        // Создание таймера для обновления кадров анимации
+        timer = new Timer(FRAME_DELAY, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentFrame = (currentFrame + 1) % NUM_FRAMES;
+                animationPanel.repaint();
+            }
+        });
+        timer.start();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AnimationExample();
+            }
+        });
+    }
+}

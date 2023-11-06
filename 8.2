@@ -1,0 +1,39 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class ImageDisplay {
+    public static void main(String[] args) {
+        // Проверяем, есть ли аргументы командной строки
+        if (args.length == 0) {
+            System.out.println("Пожалуйста, укажите путь к изображению в аргументах командной строки.");
+            return;
+        }
+
+        // Получаем путь к изображению из аргументов командной строки
+        String imagePath = args[0];
+
+        // Создаем JFrame
+        JFrame frame = new JFrame("Отображение изображения");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+
+        // Загружаем изображение из указанного пути
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+        Image image = imageIcon.getImage();
+
+        // Создаем JPanel для отображения изображения
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(image, 0, 0, this);
+            }
+        };
+
+        // Добавляем JPanel с изображением на JFrame
+        frame.add(panel);
+
+        // Делаем JFrame видимым
+        frame.setVisible(true);
+    }
+}

@@ -1,0 +1,45 @@
+// Интерфейс Nameable
+public interface Nameable {
+    String getName(); // Метод для получения имени объекта
+}
+
+// Пример класса, реализующего интерфейс Nameable (планета)
+public class Planet implements Nameable {
+    private String name;
+
+    public Planet(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return name; // Возвращает имя планеты
+    }
+}
+
+// Пример класса, реализующего интерфейс Nameable (машина)
+public class Car implements Nameable {
+    private String modelName;
+
+    public Car(String modelName) {
+        this.modelName = modelName;
+    }
+
+    @Override
+    public String getName() {
+        return modelName; // Возвращает модель машины
+    }
+}
+
+// Пример использования интерфейса Nameable
+public class Main {
+    public static void main(String[] args) {
+        // Создание объектов различных классов
+        Planet earth = new Planet("Earth");
+        Car ferrari = new Car("Ferrari SF90 Stradale");
+
+        // Проверка работы метода getName() для объектов
+        System.out.println("Name of the planet: " + earth.getName()); // Вывод имени планеты
+        System.out.println("Name of the car: " + ferrari.getName()); // Вывод названия модели машины
+    }
+}

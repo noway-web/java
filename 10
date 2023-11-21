@@ -1,0 +1,16 @@
+public class Main {
+    // Рекурсивная функция для вывода цифр числа
+    public static void printDigits(int n) {
+        if (n < 10) {
+            System.out.print(n + " "); // Вывод последней цифры и завершение рекурсии
+        } else {
+            printDigits(n / 10); // Рекурсивный вызов для числа без последней цифры
+            System.out.print(n % 10 + " "); // Вывод текущей цифры
+        }
+    }
+
+    public static void main(String[] args) {
+        int number = 987654321; // Здесь задайте ваше число
+        printDigits(number);
+    }
+}

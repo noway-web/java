@@ -1,0 +1,45 @@
+// Интерфейс Priceable
+public interface Priceable {
+    double getPrice(); // Метод для получения цены объекта
+}
+
+// Пример класса, реализующего интерфейс Priceable (недвижимость)
+public class RealEstate implements Priceable {
+    private double price;
+
+    public RealEstate(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public double getPrice() {
+        return price; // Возвращает цену недвижимости
+    }
+}
+
+// Пример класса, реализующего интерфейс Priceable (автомобиль)
+public class Car implements Priceable {
+    private double price;
+
+    public Car(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public double getPrice() {
+        return price; // Возвращает цену автомобиля
+    }
+}
+
+// Пример использования интерфейса Priceable
+public class Main {
+    public static void main(String[] args) {
+        // Создание объектов различных классов
+        RealEstate house = new RealEstate(250000.0);
+        Car ferrari = new Car(300000.0);
+
+        // Проверка работы метода getPrice() для объектов
+        System.out.println("Price of the house: $" + house.getPrice()); // Вывод цены недвижимости
+        System.out.println("Price of the car: $" + ferrari.getPrice()); // Вывод цены автомобиля
+    }
+}

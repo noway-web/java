@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Student {
+    private String name;
+    private double gpa;
+
+    public Student(String name, double gpa) {
+        this.name = name;
+        this.gpa = gpa;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+}
+
+public class MergeSortStudents {
+
+    // Метод слияния двух отсортированных списков студентов
+    public static List<Student> mergeSort(List<Student> list1, List<Student> list2) {
+        List<Student> mergedList = new ArrayList<>();
+
+        int i = 0, j = 0;
+        // Проход по обоим спискам для слияния элементов в один отсортированный список
+        while (i < list1.size() && j < list2.size()) {
+            if (list1.get(i).getGpa() >= list2.get(j).getGpa()) {
+                mergedList.add(list1.get(i));
+                i++;
+            } else {
+                mergedList.add(list2.get(j));
+                j++;
+            }
+        }
+
+        // Добавление оставшихся элементов из первого списка
+        while (i < list1.size()) {
+            mergedList.add(list1.get(i));
+            i++;
+        }
+
+        // Добавление оставшихся элементов из второго списка
+        while (j < list2.size()) {
+            mergedList.add(list2.get(j));
+            j++;
+        }
+
+        return mergedList;
+    }
+
+    public static void main(String[] args) {
+        // Создание и заполнение двух списков студентов
+        List<Student> studentsList1 = new ArrayList<>();
+        studentsList1.add(new Student("Alice", 3.8));
+        studentsList1.add(new Student("Bob", 3.5));
+        studentsList1.add(new Student("Eva", 3.9));
+
+        List<Student> studentsList2 = new ArrayList<>();
+        studentsList2.add(new Student("Charlie", 4.0));
+        studentsList2.add(new Student("David", 3.2));
+
+        // Сортировка обоих списков по убыванию GPA
+        studentsList1.sort((s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
+        studentsList2.sort((s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
+
+        // Объединение и сортировка списков с использованием mergeSort
+        List<Student> mergedSortedStudents = mergeSort(studentsList1, studentsList2);
+
+        // Вывод объединенного и отсортированного списка студентов
+        System.out.println("Merged and sorted list of students by GPA:");
+        for (Student student : mergedSortedStudents) {
+            System.out.println(student.getName() + ": " + student.getGpa());
+        }
+    }
+}
